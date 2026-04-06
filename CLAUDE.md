@@ -3,25 +3,27 @@
 ## Common Commands
 
 ### Build & Package
-- **Build**: `./mvnw clean compile`
-- **Package**: `./mvnw clean package`
-- **Install**: `./mvnw clean install`
+- **Build**: `mvn clean compile`
+- **Package**: `mvn clean package`
+- **Install**: `mvn clean install`
 
 ### Execution
-- **Run Application**: `./mvnw spring-boot:run`
-- **Run with Testcontainers (Dev Mode)**: `./mvnw spring-boot:test-run`
+- **Run Application**: `mvn spring-boot:run -pl forge-app`
+- **Run with Testcontainers (Dev Mode)**: `mvn spring-boot:test-run -pl forge-app`
 
 ### Testing
-- **Run All Tests**: `./mvnw test`
-- **Run Single Test**: `./mvnw test -Dtest=ClassName` (e.g., `./mvnw test -Dtest=DaggerTestcontainersForgeApplicationTests`)
-- **Run Single Test Method**: `./mvnw test -Dtest=ClassName#methodName`
+- **Run All Tests**: `mvn test`
+- **Run Single Test**: `mvn test -Dtest=ClassName`
+- **Run Single Test Method**: `mvn test -Dtest=ClassName#methodName`
 
 ## Architecture & Conventions
 
 ### High-Level Architecture
-This is a Spring Boot application (v4.0.5+) utilizing Java 21. It is designed to work with Testcontainers for both automated testing and local development.
+This is a multi-module Spring Boot application (v4.0.5+) utilizing Java 21.
 
-- **Main Application**: `io.github.modernstack.forge.DaggerTestcontainersForgeApplication`
+- **Root Project**: `dagger-testcontainers-forge` (Parent POM)
+- **Application Module**: `forge-app`
+- **Main Application**: `io.github.modernstack.forge.DaggerTestcontainersForgeApplication` (in `forge-app`)
 - **Test Configuration**: `io.github.modernstack.forge.TestcontainersConfiguration` - This class is intended to hold Testcontainers bean definitions (currently empty).
 - **Local Dev with Containers**: `io.github.modernstack.forge.TestDaggerTestcontainersForgeApplication` - This class in the test source tree allows running the application locally while automatically starting containers defined in `TestcontainersConfiguration`.
 
