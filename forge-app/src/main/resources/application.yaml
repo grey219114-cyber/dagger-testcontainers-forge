@@ -1,3 +1,5 @@
 spring:
   application:
     name: dagger-testcontainers-forge
+server:
+  port: 8878
